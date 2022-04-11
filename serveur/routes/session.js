@@ -33,10 +33,6 @@ con.connect(function (err) {
     console.log("Connected!");
 });
 
-// let getAllSession = function () {
-//     return "SELECT * FROM session INNER JOIN utilisateur ON session.fk_utilisateur = utilisateur.idutilisateur"
-// }
-
 // session/
 router.get('/:idu', auth, function (req, res, next) {
     let idu = req.params.idu;
@@ -45,13 +41,7 @@ router.get('/:idu', auth, function (req, res, next) {
         res.json(result)
     });
 })
-// router.post('/', auth, function (req, res, next) {
-//     let idu = req.body.iduser
-//     con.query('SELECT * FROM session INNER JOIN utilisateur ON session.fk_utilisateur = utilisateur.idutilisateur WHERE utilisateur.idutilisateur = ' + idu, function (err, result) {
-//         if (err) throw err;
-//         res.json(result)
-//     });
-// })
+
 router.post('/remove', auth, function (req, res, next) {
     let id = req.body.id
     con.query('UPDATE `session` SET `supprime`= 1 WHERE session.idsession = ' + id, function (err, result) {
