@@ -3,7 +3,7 @@ import { Nav, Container, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 
-const Navigation = () => {
+const Navigation = ({ connected }) => {
     return (
         <div className='navigation'>
             <Navbar bg="black" variant="dark" sticky="top">
@@ -15,8 +15,8 @@ const Navigation = () => {
                         height="30"
                         className="d-inline-block align-top"
                     />{' '}FishingPad</Navbar.Brand>
-                    <Nav className="me-auto">
-                        <NavLink to="/" className={(nav) => (nav.isActive ? "nav-active" : "nav-link-nav")}>Home</NavLink>
+                    <Nav className={(connected ? "me-auto" : "display-none")}>
+                        <NavLink to="/session" className={(nav) => (nav.isActive ? "nav-active" : "nav-link-nav")}>Home</NavLink>
                         <NavLink to="/about" className={(nav) => (nav.isActive ? "nav-active" : "nav-link-nav")}>à propos</NavLink>
                     </Nav>
                 </Container>

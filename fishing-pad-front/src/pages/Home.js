@@ -5,7 +5,7 @@ import Session from '../components/Session';
 const Home = () => {
     return (
         <div>
-            <Navigation />
+            <Navigation connected={true} />
             <Session />
         </div>
     );

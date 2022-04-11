@@ -30,31 +30,30 @@ router.post('/login', function (req, res, next) {
     let passwordfront = req.body.password
     con.query(isLoged(mail), function (err, result) {
         if (result == "") {
-            console.log("if !result ok");
             return res.status(401).json({ error: 'Mail incorrect !' })
-        }else{
+        } else {
             bcrypt.compare(passwordfront, result["0"]["pass"])
-            .then(valid => {
-                if (!valid) {
-                    return res.status(401).json({ error: 'Mot de passe incorrect !' })
-                }
-                res.status(200).json({
-                error: 'True',
-                loged: result["0"]["loged"],
-                token: jwt.sign(
-                    { loged: result["0"]["loged"] },
-                    KEY,
-                    { expiresIn: '24h' }
-                  )
-                });
-            })
-            .catch(error => res.status(500).json({ error : 'Erreur serveur' }))
+                .then(valid => {
+                    if (!valid) {
+                        return res.status(401).json({ error: 'Mot de passe incorrect !' })
+                    }
+                    res.status(200).json({
+                        error: 'True',
+                        loged: result["0"]["loged"],
+                        token: jwt.sign(
+                            { loged: result["0"]["loged"] },
+                            KEY,
+                            { expiresIn: '24h' }
+                        )
+                    });
+                })
+                .catch(error => res.status(500).json({ error: 'Erreur serveur' }))
         }
     });
 });
 
-let singup = function (nom, prenom, mail, hash) {
-    return "INSERT INTO utilisateur (nom, prenom, mail, mdp) VALUES ('" + nom + "', '" + prenom + "', '" + mail + "', '" + hash + "')"
+let singup = function (nom, prenom, mail, hash, identifiant) {
+    return "INSERT INTO utilisateur (nom, prenom, mail, mdp, identifiant) VALUES ('" + nom + "', '" + prenom + "', '" + mail + "', '" + hash + "', '" + identifiant + "')"
 }
 
 router.post('/signup', function (req, res, next) {
@@ -62,13 +61,14 @@ router.post('/signup', function (req, res, next) {
     let prenom = req.body.prenom
     let mail = req.body.mail
     let motdepasse = req.body.motdepasse
+    let identifiant = req.body.identifiant
     bcrypt.hash(motdepasse, 10)
-    .then(hash => {
-        con.query(singup(nom, prenom, mail, hash), function (err, result) {
-            if (err) throw err;
-            res.json(result)
-        });
-      }).catch(error => res.status(500).json({ error }));
+        .then(hash => {
+            con.query(singup(nom, prenom, mail, hash, identifiant), function (err, result) {
+                if (err) throw err;
+                res.json(result)
+            });
+        }).catch(error => res.status(500).json({ error }));
 });
 
 
