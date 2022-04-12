@@ -1,6 +1,7 @@
 const express = require('express')
 const sql = require('mysql')
 const router = express.Router()
+const fs = require('fs')
 
 const auth = require('../middleware/auth');
 require('dotenv').config();
@@ -44,7 +45,19 @@ router.get('/:idu', auth, function (req, res, next) {
 
 router.post('/remove', auth, function (req, res, next) {
     let id = req.body.id
-    con.query('UPDATE `session` SET `supprime`= 1 WHERE session.idsession = ' + id, function (err, result) {
+    let idutilisateur = req.body.idutilisateur
+    let img = req.body.img
+    let path = `${__dirname}/public/${img}`
+
+    //Suppression image
+    fs.unlink(path, (err) => {
+        if (err) {
+            console.error(err)
+            return
+        }
+    })
+
+    con.query('DELETE FROM session WHERE idsession=' + id + ' AND fk_utilisateur=' + idutilisateur, function (err, result) {
         if (err) throw err;
         res.json("ok")
     });
@@ -52,11 +65,12 @@ router.post('/remove', auth, function (req, res, next) {
 router.post('/update', auth, function (req, res, next) {
     let id = req.body.id
     let description = req.body.description
-    let meteo = req.body.meteo
     let img = req.body.img
     let lieu = req.body.lieu
+    let idu = req.body.idu;
+    let date = req.body.date
 
-    con.query('UPDATE session SET description="' + description + '",meteo="' + meteo + '",img="' + img + '",lieu="' + lieu + '" WHERE idsession=' + id, function (err, result) {
+    con.query('UPDATE session SET date="' + date + '", description="' + description + '", img="' + img + '", lieu="' + lieu + '" WHERE idsession=' + id + ' AND fk_utilisateur=' + idu, function (err, result) {
         if (err) throw err;
         res.json("Session Modifié")
     });
@@ -64,13 +78,13 @@ router.post('/update', auth, function (req, res, next) {
 router.post('/add', auth, function (req, res, next) {
     let date = req.body.date
     let description = req.body.description
-    let meteo = req.body.meteo
     let img = req.body.img
     let lieu = req.body.lieu
+    let idu = req.body.idu
 
-    con.query('INSERT INTO `session` (`date`, `description`, `supprime`, `meteo`, `img`, `lieu`) VALUES ("' + date + '", "' + description + '", 0,"' + meteo + '", "' + img + '", "' + lieu + '")', function (err, result) {
+    con.query('INSERT INTO `session` (`date`, `description`, `supprime`, `img`, `lieu`, `fk_utilisateur`) VALUES ("' + date + '", "' + description + '", 0, "' + img + '", "' + lieu + '", "' + idu + '")', function (err, result) {
         if (err) throw err;
-        res.json("ok")
+        res.json("Session Ajouté")
     });
 })
 module.exports = router;
