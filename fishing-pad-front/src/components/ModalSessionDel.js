@@ -4,6 +4,7 @@ import { Button } from 'react-bootstrap';
 
 const ModalSessionDel = ({ id, img }) => {
 
+    const config = require('../config.json');
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -35,7 +36,7 @@ const ModalSessionDel = ({ id, img }) => {
                 img: img
             })
         };
-        await fetch('http://localhost:3000/session/remove', requestOptions)
+        await fetch(config.api_url + 'session/remove', requestOptions)
             .then(res => {
                 return res.json()
             }).then(json => {

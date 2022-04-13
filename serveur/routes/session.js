@@ -49,13 +49,17 @@ router.post('/remove', auth, function (req, res, next) {
     let img = req.body.img
     let path = `${__dirname}/public/${img}`
 
-    //Suppression image
-    fs.unlink(path, (err) => {
-        if (err) {
-            console.error(err)
-            return
-        }
-    })
+    if (img !== "image_default.jpg") {
+
+        //Suppression image
+        fs.unlink(path, (err) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+        })
+
+    }
 
     con.query('DELETE FROM session WHERE idsession=' + id + ' AND fk_utilisateur=' + idutilisateur, function (err, result) {
         if (err) throw err;

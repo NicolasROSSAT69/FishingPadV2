@@ -6,6 +6,7 @@ import nextId from "react-id-generator";
 
 const ModalInscription = () => {
 
+    const config = require('../config.json');
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -40,7 +41,7 @@ const ModalInscription = () => {
                         identifiant: id
                     })
                 };
-                fetch('http://localhost:3000/users/signup', requestOptions)
+                fetch(config.api_url + 'users/signup', requestOptions)
                     .then(response => response.json())
                     .then(NotificationManager.success('Inscription réussi, vous pouvez vous connecter', 'Inscription', 3000));
 

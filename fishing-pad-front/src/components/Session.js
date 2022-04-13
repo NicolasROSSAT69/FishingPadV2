@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import Cards from './Cards';
 import ModalSessionAdd from './ModalSessionAdd';
 import axios from 'axios';
+const config = require('../config.json');
 
 const Session = () => {
 
     const [session, setsession] = useState([]);
+
 
     useEffect(() => {
 
@@ -17,13 +19,13 @@ const Session = () => {
 
             let token = window.sessionStorage.getItem("token");
             let idu = window.sessionStorage.getItem("idu");
-            let config = {
+            let configu = {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Token ' + token
                 }
             }
-            axios.get('http://localhost:3000/session/' + idu, config).then((res) => setsession(res.data));
+            axios.get(config.api_url + 'session/' + idu, configu).then((res) => setsession(res.data));
         }
 
     }, []);

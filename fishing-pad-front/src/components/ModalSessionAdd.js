@@ -8,6 +8,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 
 const ModalSessionAdd = () => {
 
+    const config = require('../config.json');
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -27,11 +28,10 @@ const ModalSessionAdd = () => {
     function onUploadFile(e) {
 
         selectedFile = e.target.files[0]; // accessing file      
-        selectedFile = selectedFile;
         let formData = new FormData();
         formData.append("file", selectedFile);  // appending file
         // sending file to the backend
-        axios.post("http://localhost:3000/uploadFile", formData)
+        axios.post(config.api_url + "uploadFile", formData)
             .then(res => {
                 console.log(res);
             })
@@ -65,7 +65,7 @@ const ModalSessionAdd = () => {
                         idu: window.sessionStorage.getItem("idu")
                     })
                 };
-                await fetch('http://localhost:3000/session/add', requestOptions)
+                await fetch(config.api_url + 'session/add', requestOptions)
                     .then(res => {
                         return res.json()
                     }).then(json => {
@@ -103,7 +103,7 @@ const ModalSessionAdd = () => {
                         idu: window.sessionStorage.getItem("idu")
                     })
                 };
-                await fetch('http://localhost:3000/session/add', requestOptions)
+                await fetch(config.api_url + 'session/add', requestOptions)
                     .then(res => {
                         return res.json()
                     }).then(json => {

@@ -6,6 +6,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 
 const Identification = () => {
 
+    const config = require('../config.json');
     const [mail, setmail] = useState('');
     const [mdp, setmdp] = useState('');
 
@@ -32,7 +33,7 @@ const Identification = () => {
                     password: mdp
                 })
             };
-            fetch('http://localhost:3000/users/login', requestOptions)
+            fetch(config.api_url + 'users/login', requestOptions)
                 .then(res => {
 
                     return res.json()

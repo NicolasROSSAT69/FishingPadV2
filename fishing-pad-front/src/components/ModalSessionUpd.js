@@ -8,6 +8,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 
 const ModalSessionUpd = ({ session }) => {
 
+    const config = require('../config.json');
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -15,7 +16,6 @@ const ModalSessionUpd = ({ session }) => {
     const [lieu, setLieu] = useState(session.lieu);
     const [description, setDescription] = useState(session.description);
     let selectedFile = null;
-    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
 
 
@@ -35,7 +35,7 @@ const ModalSessionUpd = ({ session }) => {
         let formData = new FormData();
         formData.append("file", selectedFile);  // appending file
         // sending file to the backend
-        axios.post("http://localhost:3000/uploadFile", formData)
+        axios.post(config.api_url + "uploadFile", formData)
             .then(res => {
                 console.log(res);
             })
@@ -68,7 +68,7 @@ const ModalSessionUpd = ({ session }) => {
                         idu: window.sessionStorage.getItem("idu"),
                     })
                 };
-                await fetch('http://localhost:3000/session/update', requestOptions)
+                await fetch(config.api_url + 'session/update', requestOptions)
                     .then(res => {
                         return res.json()
                     }).then(json => {
@@ -98,7 +98,7 @@ const ModalSessionUpd = ({ session }) => {
                         idu: window.sessionStorage.getItem("idu"),
                     })
                 };
-                await fetch('http://localhost:3000/session/update', requestOptions)
+                await fetch(config.api_url + 'session/update', requestOptions)
                     .then(res => {
                         return res.json()
                     }).then(json => {

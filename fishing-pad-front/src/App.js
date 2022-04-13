@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Identification from './pages/Identification';
 
-
 function App() {
   return (
     <BrowserRouter>

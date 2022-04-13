@@ -7,18 +7,17 @@ const Cards = ({ session }) => {
 
     const [date, setDate] = useState("");
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const [id, setId] = useState();
+    const config = require('../config.json');
 
     useEffect(() => {
 
         setDate(new Date(session.date).toLocaleDateString('fr-FR', options));
-        setId(session.id);
 
     }, []);
     return (
         <div className='pt-3 mb-3'>
             <Card>
-                <Card.Img variant="top" src={"http://localhost:3000/getFile/" + session.img} />
+                <Card.Img variant="top" src={config.api_url + "getFile/" + session.img} />
                 <Card.Body>
                     <Card.Title>{date}</Card.Title>
                     <Card.Text>À {session.lieu}</Card.Text>
