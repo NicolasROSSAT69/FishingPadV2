@@ -1,6 +1,7 @@
 import React from 'react';
 import { Nav, Container, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import DropDown from './DropDown';
 
 
 const Navigation = ({ connected }) => {
@@ -19,8 +20,10 @@ const Navigation = ({ connected }) => {
                         <NavLink to="/session" className={(nav) => (nav.isActive ? "nav-active" : "nav-link-nav")}>Home</NavLink>
                         <NavLink to="/about" className={(nav) => (nav.isActive ? "nav-active" : "nav-link-nav")}>à propos</NavLink>
                     </Nav>
+                    {(connected ? <DropDown /> : "")}
                 </Container>
             </Navbar>
+
         </div>
     );
 };

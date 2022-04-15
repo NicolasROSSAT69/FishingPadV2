@@ -49,6 +49,9 @@ const Identification = () => {
                         window.sessionStorage.setItem("token", json.token);
                         window.sessionStorage.setItem("iscon", true);
                         window.sessionStorage.setItem("idu", json.loged);
+                        window.sessionStorage.setItem("nom", json.nom);
+                        window.sessionStorage.setItem("prenom", json.prenom);
+                        window.sessionStorage.setItem("mail", json.mail);
                         NotificationManager.success('Succès', 'Vous êtes connecté', 3000);
                         setTimeout(() => {
                             window.location.href = '/session';

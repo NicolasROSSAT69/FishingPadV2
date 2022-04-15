@@ -43,8 +43,14 @@ const ModalInscription = () => {
                 };
                 fetch(config.api_url + 'users/signup', requestOptions)
                     .then(response => response.json())
-                    .then(NotificationManager.success('Inscription réussi, vous pouvez vous connecter', 'Inscription', 3000));
+                    .then(() => {
+                        NotificationManager.success('Inscription réussi, vous pouvez vous connecter', 'Inscription', 3000);
+                        setTimeout(() => {
 
+                            handleClose();
+
+                        }, 1000);
+                    });
             }
             else {
 

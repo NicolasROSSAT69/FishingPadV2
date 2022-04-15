@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { json } = require('body-parser')
 
+const auth = require('../middleware/auth');
 require('dotenv').config();
 const KEY = process.env.KEY;
 const sqlUser = process.env.SQL_USER;
@@ -22,7 +23,7 @@ let con = sql.createConnection({
 });
 
 let isLoged = function (mail) {
-    return "SELECT utilisateur.idutilisateur as loged, utilisateur.mdp as pass FROM utilisateur WHERE utilisateur.mail = '" + mail + "'"
+    return "SELECT utilisateur.idutilisateur as loged, utilisateur.mdp as pass, utilisateur.nom as nom, utilisateur.prenom as prenom, utilisateur.mail as mail FROM utilisateur WHERE utilisateur.mail = '" + mail + "'"
 }
 
 router.post('/login', function (req, res, next) {
@@ -40,6 +41,9 @@ router.post('/login', function (req, res, next) {
                     res.status(200).json({
                         error: 'True',
                         loged: result["0"]["loged"],
+                        nom: result["0"]["nom"],
+                        prenom: result["0"]["prenom"],
+                        mail: result["0"]["mail"],
                         token: jwt.sign(
                             { loged: result["0"]["loged"] },
                             KEY,
@@ -70,6 +74,14 @@ router.post('/signup', function (req, res, next) {
             });
         }).catch(error => res.status(500).json({ error }));
 });
+
+router.get('/:idu', auth, function (req, res, next) {
+    let idu = req.params.idu;
+    con.query('SELECT * FROM utilisateur WHERE utilisateur.idutilisateur = ' + idu, function (err, result) {
+        if (err) throw err;
+        res.json(result)
+    });
+})
 
 
 module.exports = router;
