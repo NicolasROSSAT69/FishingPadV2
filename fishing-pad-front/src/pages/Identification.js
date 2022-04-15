@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, InputGroup, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button } from 'react-bootstrap';
 import ModalInscription from '../components/ModalInscription';
 import Navigation from '../components/Navigation';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
@@ -80,14 +80,14 @@ const Identification = () => {
             <Card className='m-4'>
                 <Card.Body>
                     <Card.Title>Connexion</Card.Title>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                    <Form.Group className="mb-3" >
+                        <Form.Label>Email</Form.Label>
                         <Form.Control type="email" onChange={(e) => setmail(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Mot de passe</InputGroup.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                        <Form.Label>Mot de passe</Form.Label>
                         <Form.Control type="password" onChange={(e) => setmdp(e.target.value)} />
-                    </InputGroup>
+                    </Form.Group>
                     <Button variant="dark" onClick={handleClick}>
                         Se connecter
                     </Button>

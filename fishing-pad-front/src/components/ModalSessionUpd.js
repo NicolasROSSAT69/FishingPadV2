@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Modal from "react-bootstrap/Modal";
-import { Button, InputGroup, Form, FormControl } from 'react-bootstrap';
+import { Button, Form, FormControl } from 'react-bootstrap';
 import axios from 'axios';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 
@@ -129,21 +129,21 @@ const ModalSessionUpd = ({ session }) => {
                     <Modal.Title>Ajouter une session de peche</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Date</InputGroup.Text>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Date</Form.Label>
                         <Form.Control type="date" onChange={(e) => setDate(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Lieu</InputGroup.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Lieu</Form.Label>
                         <Form.Control type="text" defaultValue={session.lieu} onChange={(e) => setLieu(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
+                    </Form.Group>
+                    <Form.Group className="mb-3">
                         <Form.Control type="file" accept="image/*" onChange={(e) => onUploadFile(e)} />
-                    </InputGroup>
-                    <InputGroup>
-                        <InputGroup.Text>Description</InputGroup.Text>
-                        <FormControl as="textarea" aria-label="With textarea" defaultValue={session.description} onChange={(e) => setDescription(e.target.value)} />
-                    </InputGroup>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Description</Form.Label>
+                        <FormControl as="textarea" aria-label="With textarea" rows={5} defaultValue={session.description} onChange={(e) => setDescription(e.target.value)} />
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={handleClose}>

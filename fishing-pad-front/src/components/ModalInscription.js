@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from "react-bootstrap/Modal";
-import { Button, InputGroup, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import nextId from "react-id-generator";
 
@@ -70,26 +70,26 @@ const ModalInscription = () => {
                     <Modal.Title>S'inscrire</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Nom</InputGroup.Text>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Nom</Form.Label>
                         <Form.Control type="text" onChange={(e) => setnom(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Prénom</InputGroup.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Prénom</Form.Label>
                         <Form.Control type="text" onChange={(e) => setprenom(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Mail</InputGroup.Text>
-                        <Form.Control type="email" onChange={(e) => setmail(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Mot de passe</InputGroup.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setmail(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Mot de passe</Form.Label>
                         <Form.Control type="password" onChange={(e) => setmdp(e.target.value)} />
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <InputGroup.Text id="basic-addon1">Confirmation mot de passe</InputGroup.Text>
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Confirmation mot de passe</Form.Label>
                         <Form.Control type="password" onChange={(e) => setmdpc(e.target.value)} />
-                    </InputGroup>
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={handleClose}>
