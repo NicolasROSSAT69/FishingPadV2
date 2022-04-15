@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Dropdown } from 'react-bootstrap';
-import axios from 'axios';
-const config = require('../config.json');
 
 const DropDown = () => {
 
@@ -21,7 +19,7 @@ const DropDown = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    <Dropdown.Item href="#/action-1">Profil</Dropdown.Item>
+                    <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
                     <Dropdown.Item onClick={LogoutUser}>Déconnexion</Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown>
