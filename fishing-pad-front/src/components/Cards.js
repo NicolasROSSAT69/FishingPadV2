@@ -5,21 +5,15 @@ import ModalSessionUpd from './ModalSessionUpd';
 
 const Cards = ({ session }) => {
 
-    const [date, setDate] = useState("");
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const config = require('../config.json');
 
-    useEffect(() => {
-
-        setDate(new Date(session.date).toLocaleDateString('fr-FR', options));
-
-    }, []);
     return (
         <div className='pt-3 mb-3'>
             <Card>
                 <Card.Img variant="top" src={config.api_url + "getFile/" + session.img} />
                 <Card.Body>
-                    <Card.Title>{date}</Card.Title>
+                    <Card.Title>{new Date(session.date).toLocaleDateString('fr-FR', options)}</Card.Title>
                     <Card.Text>À {session.lieu}</Card.Text>
                     <Card.Text>
                         {session.description}

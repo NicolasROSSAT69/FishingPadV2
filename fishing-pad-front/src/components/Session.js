@@ -31,7 +31,7 @@ const Session = () => {
 
                 setsession(res.data);
 
-                const arraytemp = res.data.map(lieu => lieu.lieu);
+                const arraytemp = res.data.map(lieu => lieu.lieu.toUpperCase());
                 const arrayfin = arraytemp.filter((val, id, array) => array.indexOf(val) === id);
                 setradio(arrayfin);
 
@@ -61,7 +61,7 @@ const Session = () => {
 
             <div className='row row-cols-1 row-cols-md-4 g-4'>
                 {session
-                    .filter((session) => session.lieu.includes(selectedRadio))
+                    .filter((session) => session.lieu.toUpperCase().includes(selectedRadio))
                     .map((session, index) => (
                         <Cards key={index} session={session} />
                     ))}
