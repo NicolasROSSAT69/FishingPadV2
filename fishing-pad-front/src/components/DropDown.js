@@ -1,5 +1,5 @@
-import React from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import ModalProfile from './ModalProfile';
 
 const DropDown = () => {
 
@@ -18,10 +18,12 @@ const DropDown = () => {
                 variant="secondary"
                 title={window.sessionStorage.getItem("prenom")}
             >
-                <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
+                <ModalProfile />
+
                 <Dropdown.Divider />
                 <Dropdown.Item onClick={LogoutUser}>Déconnexion</Dropdown.Item>
             </DropdownButton>
+
         </div>
     );
 };

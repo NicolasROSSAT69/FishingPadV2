@@ -37,7 +37,7 @@ con.connect(function (err) {
 // session/
 router.get('/:idu', auth, function (req, res, next) {
     let idu = req.params.idu;
-    con.query('SELECT * FROM session INNER JOIN utilisateur ON session.fk_utilisateur = utilisateur.idutilisateur WHERE utilisateur.idutilisateur = ' + idu, function (err, result) {
+    con.query('SELECT * FROM session INNER JOIN utilisateur ON session.fk_utilisateur = utilisateur.idutilisateur WHERE utilisateur.idutilisateur = ' + idu + ' ORDER BY date', function (err, result) {
         if (err) throw err;
         res.json(result)
     });

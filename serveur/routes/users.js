@@ -83,5 +83,38 @@ router.get('/:idu', auth, function (req, res, next) {
     });
 })
 
+router.post('/update', auth, function (req, res, next) {
+
+    let nom = req.body.nom
+    let prenom = req.body.prenom
+    let mail = req.body.mail
+    let idu = req.body.idu
+
+    con.query('UPDATE utilisateur SET nom="' + nom + '", prenom="' + prenom + '", mail="' + mail + '" WHERE idutilisateur=' + idu, function (err, result) {
+        if (err) throw err;
+        res.json("Utilisateur Modifié")
+    });
+
+});
+
+router.post('/update/withmdp', auth, function (req, res, next) {
+
+    let nom = req.body.nom
+    let prenom = req.body.prenom
+    let mail = req.body.mail
+    let mdp = req.body.mdp
+    let idu = req.body.idu
+
+
+    bcrypt.hash(mdp, 10)
+        .then(hash => {
+            con.query('UPDATE utilisateur SET nom="' + nom + '", mdp="' + hash + '", prenom="' + prenom + '", mail="' + mail + '" WHERE idutilisateur=' + idu, function (err, result) {
+                if (err) throw err;
+                res.json("Utilisateur Modifié")
+            });
+        }).catch(error => res.status(500).json({ error }));
+
+});
+
 
 module.exports = router;
